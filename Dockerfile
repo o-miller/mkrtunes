@@ -20,6 +20,10 @@ RUN apt-get update \
 	vim \
 	&& apt-get clean
 
+
+#pipx vs python3 -m pip -venv
+#TODO: Locale
+
 # Add keyring for mopidy repository 
 RUN mkdir -p /etc/apt/keyrings \
     && wget -q -O /etc/apt/keyrings/mopidy-archive-keyring.gpg \
@@ -29,15 +33,15 @@ RUN mkdir -p /etc/apt/keyrings \
 
 # Install Base Packages
 RUN apt-get update && apt-get install -y \
-    mopidy \
+	mopidy \
 #    mopidy-mpd \
 #    mopidy-iris \
 #    alsa-utils \
-    pulseaudio \
-    avahi-daemon \
-    ncmpcpp \
-    jq \
-    && apt-get clean
+#    pulseaudio \
+#    avahi-daemon \
+#    ncmpcpp \
+#    jq \
+	&& apt-get clean
 
 # Install required packages
 # RUN apt-get update && apt-get install -y \
