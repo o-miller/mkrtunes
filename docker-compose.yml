@@ -1,0 +1,11 @@
+version: '3.7'
+
+services:
+  mopidy-client:
+    build: .
+    restart: always
+    network_mode: host
+    volumes:
+      - /var/lib/mopidy:/var/lib/mopidy
+    environment:
+      - PULSE_SERVER=tcp:127.0.0.1:4713
