@@ -20,6 +20,15 @@ RUN apt-get update \
 	vim \
 	&& apt-get clean
 
+RUN sed -i 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/g' /etc/locale.gen \
+	&& echo 'LANG=en_US.UTF-8' > /etc/default/locale \
+	&& locale-gen \
+#	&& dpkg-reconfigure -f noninteractive locales
+
+RUN ssh-keygen -A \
+    && update-rc.d ssh enable \
+    && invoke-rc.d ssh start
+
 
 #pipx vs python3 -m pip -venv
 #TODO: Locale
