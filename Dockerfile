@@ -20,28 +20,32 @@ RUN set -ex \
 		curl \
 		gnupg \
 		python3 \
-		python3-cryptography \
+		python3-venv \
 		python3-distutils \
-		#python3-venv \
+		#python3-cryptography \
+		#python3-distutils \
 		#python3-pip \
 		gstreamer1.0-alsa \
 		#gstreamer1.0-plugins-bad \
-		pipx \
+		#pipx \
 		dumb-init \
 		vim \
 		jq \
+		#openssl-client \
 		alsa-utils \
 		avahi-daemon \
-	&& curl -L https://packaging.python.org/en/latest/tutorials/installing-packages/ | python3 - \
-	&& pip install pipenv \
-	&& apt-get clean \
-	&& rm  -rm /var/lib/apt/lists/* /tmp/* /var/tmp/* ~/.cache
-
+	&& apt-get clean
 
 RUN set -ex \
-	&& sed -i 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/g' /etc/locale.gen \
-	&& echo 'LANG=en_US.UTF-8' > /etc/default/locale \
-	&& locale-gen 
+	&& python3 -m venv /opt/mopidy-venv \
+	&& /opt/mopidy-venv/bin/pip install --upgrade pip pipenv \
+	&& rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* ~/.cache
+
+
+# RUN set -ex \
+# 	&& sed -i 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/g' /etc/locale.gen \
+# 	&& echo 'LANG=en_US.UTF-8' > /etc/default/locale \
+# 	&& locale-gen 
 #	&& dpkg-reconfigure -f noninteractive locales
 
 
@@ -52,14 +56,16 @@ RUN set -ex \
     	https://apt.mopidy.com/mopidy.gpg \
     && wget -q -O /etc/apt/sources.list.d/mopidy.list \
     	https://apt.mopidy.com/bookworm.list \
-	&& apt-get update
-
-RUN set -ex \
+	&& apt-get update \
 	&& apt-get install -y mopidy
 
-RUN ssh-keygen -A \
-    && update-rc.d ssh enable \
-    && invoke-rc.d ssh start
+#RUN set -ex \
+#	&& apt-get install -y mopidy
+
+#THIS GOES IN TO DEPLOY SCRIPT TO INSTALL DOCKER AND ENABLE SSH, NOT IN CONTIANER
+#RUN ssh-keygen -A \
+#    && update-rc.d ssh enable \
+#    && invoke-rc.d ssh start
 
 #pipx vs python3 -m pip -venv
 #TODO: Locale
