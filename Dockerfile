@@ -13,14 +13,14 @@ FROM arm64v8/debian:12.9-slim
 
 
 # init before init
-RUN set -ex; \
+RUN set -ex \
 	&& apt-get update \
 	&& DEBIAN_FRONTEND=noninteractive apt-get install -y \
 		wget \
 		curl \
 		gnupg \
 		python3 \
-		python3-crypto \
+		python3-cryptography \
 		python3-distutils \
 		#python3-venv \
 		#python3-pip \
@@ -38,15 +38,15 @@ RUN set -ex; \
 	&& rm  -rm /var/lib/apt/lists/* /tmp/* /var/tmp/* ~/.cache
 
 
-RUN set -ex; \
-	sed -i 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/g' /etc/locale.gen \
+RUN set -ex \
+	&& sed -i 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/g' /etc/locale.gen \
 	&& echo 'LANG=en_US.UTF-8' > /etc/default/locale \
-	&& locale-gen \
+	&& locale-gen 
 #	&& dpkg-reconfigure -f noninteractive locales
 
 
 # Add keyring for mopidy repository 
-RUN set -ex; \
+RUN set -ex \
 	mkdir -p /etc/apt/keyrings \
     && wget -q -O /etc/apt/keyrings/mopidy-archive-keyring.gpg \
     	https://apt.mopidy.com/mopidy.gpg \
@@ -54,15 +54,12 @@ RUN set -ex; \
     	https://apt.mopidy.com/bookworm.list \
 	&& apt-get update
 
-RUN set -ex; \
-	&& apt-get install -y mopidy \
-	
-
+RUN set -ex \
+	&& apt-get install -y mopidy
 
 RUN ssh-keygen -A \
     && update-rc.d ssh enable \
     && invoke-rc.d ssh start
-
 
 #pipx vs python3 -m pip -venv
 #TODO: Locale
