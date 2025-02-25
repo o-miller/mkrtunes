@@ -57,17 +57,6 @@ RUN set -ex; \
 RUN set -ex; \
 	&& apt-get install -y mopidy \
 	
-# Initial Package Install
-RUN apt-get update \
-    && apt-get upgrade \
-    && apt-get install -y \
-	alsa-utils   \
-	wget         \
-	pulseaudio   \
-	avahi-daemon \
-	jq \
-	vim \
-	&& apt-get clean
 
 
 RUN ssh-keygen -A \
@@ -78,37 +67,6 @@ RUN ssh-keygen -A \
 #pipx vs python3 -m pip -venv
 #TODO: Locale
 
-
-# Install Base Packages
-#RUN apt-get update && apt-get install -y \
-# 	mopidy \
-# #    mopidy-mpd \
-# #    mopidy-iris \
-# #    alsa-utils \
-# #    pulseaudio \
-# #    avahi-daemon \
-# #    ncmpcpp \
-# #    jq \
-# 	&& apt-get clean
-
-# Install required packages
-# RUN apt-get update && apt-get install -y \
-#     #wget -q -O /etc/apt/keyrings/mopidy-archive-keyring.gpg https://apt.mopidy.com/mopidy.gpg \
-#     #&& wget -q -O /etc/apt/sources.list.d/mopidy.list https://apt.mopidy.com/bookworm.list \
-#     #&& apt-get install -y \
-#     mopidy \
-#     #mopidy-mpd \
-#     #mopidy-iris | only available thru pip \
-#     alsa-utils \
-#     pulseaudio \
-#     avahi-daemon \
-#     ncmpcpp \
-#     jq \
-#     vim \
-#     python3-pip \
-#     pipx \
-#     && apt-get clean 
-#     #&& python3 -m pip install Mopidy-Iris
 
 # Copy entrypoint script and configuration template
 COPY entrypoint.sh /entrypoint.sh
