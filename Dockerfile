@@ -33,8 +33,10 @@ RUN set -ex \
 		jq \
 		#openssl-client \
 		alsa-utils \
+		libasound2-dev \
+		build-essential \
 		avahi-daemon \
-		snapcast \
+		snapserver \
 	&& apt-get clean
 
 
@@ -54,17 +56,24 @@ RUN set -ex \
     && wget -q -O /etc/apt/sources.list.d/mopidy.list \
     	https://apt.mopidy.com/bookworm.list \
 	&& apt-get update \
-	&& apt-get install -y mopidy \
-		mopidy-mpd \
-		mopidy-iris
-
+	&& apt-get install -y mopidy #\
+		#mopidy-mpd
+# WE are doing something bad here, and not adhereing to the guidelines put forth in PEP668 and enforced as of Debian 12. 
+# If at any point shit is super broken, you are going to have to switch this method `--break-system-install` with a `pipenv` and virtual environments, but then also make sure that you append the python env variable path so these are available system-wide. 
+#mopidy needs to be run as system user mopidy:audio (:group), you might need to chmod 777  
 RUN set -ex \
-	&& python3 -m venv /opt/mopidy-venv \
-	&& /opt/mopidy-venv/bin/pip install --upgrade pip pipenv \
-	&& rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* ~/.cache
-#RUN set -ex \
-#	&& apt-get install -y mopidy
-
+	&& RUN curl -sSL https://bootstrap.pypa.io/get-pip.py | python3 - --break-system-packages \
+	#COMMENTED OUT BUT PRESERVING FOR FUTURE GENERATOINS #beautifulCodebase <3
+	# && python3 -m venv /opt/mopidy-venv \
+	# && /opt/mopidy-venv/bin/pip install --upgrade pip pipenv \
+	# && /opt/mopidy-venv/bin/pipenv install mopidy-iris mopidy-mpd mopidy-alsamixer \
+	# && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* ~/.cache
+RUN set -ex \
+	&& pip install --no-cache-dir \
+	mopidy-spotify \
+	mopidy-iris \
+	mopidy-mpd \
+	mopidy-alsamixer
 #THIS GOES IN TO DEPLOY SCRIPT TO INSTALL DOCKER AND ENABLE SSH, NOT IN CONTIANER
 #RUN ssh-keygen -A \
 #    && update-rc.d ssh enable \
