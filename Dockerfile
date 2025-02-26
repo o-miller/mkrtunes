@@ -34,12 +34,9 @@ RUN set -ex \
 		#openssl-client \
 		alsa-utils \
 		avahi-daemon \
+		snapcast \
 	&& apt-get clean
 
-RUN set -ex \
-	&& python3 -m venv /opt/mopidy-venv \
-	&& /opt/mopidy-venv/bin/pip install --upgrade pip pipenv \
-	&& rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* ~/.cache
 
 
 # RUN set -ex \
@@ -57,8 +54,14 @@ RUN set -ex \
     && wget -q -O /etc/apt/sources.list.d/mopidy.list \
     	https://apt.mopidy.com/bookworm.list \
 	&& apt-get update \
-	&& apt-get install -y mopidy
+	&& apt-get install -y mopidy \
+		mopidy-mpd \
+		mopidy-iris
 
+RUN set -ex \
+	&& python3 -m venv /opt/mopidy-venv \
+	&& /opt/mopidy-venv/bin/pip install --upgrade pip pipenv \
+	&& rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* ~/.cache
 #RUN set -ex \
 #	&& apt-get install -y mopidy
 
