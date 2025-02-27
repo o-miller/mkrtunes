@@ -5,47 +5,48 @@ ARG BUILD_FROM="12.9-slim"
 ARG ARCH="arm64v8"
 ARG TUNEHOST=$(hostname)
 
+FROM ${ARCH}/debian:${BUILD_FROM}
+
 ENV DEBIAN_FRONTEND=noninteractive
 ENV TUNE_SINK="/tmp/tunesink_${TUNEHOST}"
 ENV TZ="America/New_York"
-
-FROM ${ARCH}/debian:${BUILD_FROM}
 
 #sticky bit fifo attacker disabling
 
 SHELL ["/bin/sh", "-exc"]
 
-RUN sysctl fs.protected_regular=0
-RUN sed -i 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/g' /etc/locale.gen 
-RUN echo 'LANG=en_US.UTF-8' > /etc/default/locale
-RUN locale-gen
+#RUN sysctl fs.protected_regular=0
+#RUN sed -i 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/g' /etc/locale.gen 
+#RUN echo 'LANG=en_US.UTF-8' > /etc/default/locale
+#RUN locale-gen
+
+RUN apt-get update \
+	&& apt-get install -y \
+		curl \
+		wget \
+		gnupg \
+		gstreamer1.0-alsa \
+		python3-distutils \
+		dumb-init \
+		#alsa-utils \
+		#build-essential \
+		#libasound2-dev \
+		#jq \
+		#avahi-daemon \
+	&& apt-get clean
 
 RUN set -ex \
 	mkdir -p /etc/apt/keyrings \
     && wget -q -O /etc/apt/keyrings/mopidy-archive-keyring.gpg \
     	https://apt.mopidy.com/mopidy.gpg \
     && wget -q -O /etc/apt/sources.list.d/mopidy.list \
-    	https://apt.mopidy.com/bookworm.list
-
-RUN apt-get update \
-	&& apt-get install -y \
-		curl \
-		gnupg \
-		gstreamer1.0-alsa \
-		python3 \
-		dumb-init \
-		alsa-utils \
-		build-essential \
-		libasound2-dev \
-		jq \
-		avahi-daemon \
-		mopidy \
-	&& apt-get clean
+    	https://apt.mopidy.com/bookworm.list \
+	&& apt-get install -y mopidy 
 
 RUN curl -sSL https://bootstrap.pypa.io/get-pip.py | python3 - --break-system-packages
 
 RUN set -ex \
-	&& pip install --no-cache-dir \
+	&& pip install --no-cache-dir --break-system-packages \
 	mopidy-spotify \
 	mopidy-iris \
 	mopidy-mpd \
