@@ -42,6 +42,7 @@ RUN set -ex \
     	https://apt.mopidy.com/mopidy.gpg \
     && wget -q -O /etc/apt/sources.list.d/mopidy.list \
     	https://apt.mopidy.com/bookworm.list \
+	&& apt-get update \
 	&& apt-get install -y mopidy 
 
 RUN curl -sSL https://bootstrap.pypa.io/get-pip.py | python3 - --break-system-packages \

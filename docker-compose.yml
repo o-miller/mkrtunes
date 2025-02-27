@@ -1,11 +1,23 @@
-version: '3.7'
+version: '1.0'
 
 services:
   mopidy-client:
     build: .
+    image: tunedin:latest
     restart: always
-    network_mode: host
+      #network_mode: host
     volumes:
       - /var/lib/mopidy:/var/lib/mopidy
-    environment:
-      - PULSE_SERVER=tcp:127.0.0.1:4713
+      - snapfifos:/tmp/sinks
+        #environment:
+        # - PULSE_SERVER=tcp:127.0.0.1:4713
+  snapserver:
+    build: ./shared-snap/
+    image: snapserver:latest
+    restart: always
+    depends_on:
+      - mopidy_client
+    volumes:
+      - snapfifos:/tmp/sinks
+volumes:
+  snapfifos: 
