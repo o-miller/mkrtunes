@@ -4,13 +4,19 @@
 
 #ULTRA-DEBUGGING MODE, uncomment to enable
 #SHELL ["/bin/sh", "-exc"]
-FROM arm64v8/debian:12.9-slim
+ARG BUILD_FROM="12.9-slim"
+ARG ARCH="arm64v8"
 
+FROM ${ARCH}/debian:${BUILD_FROM}
+
+ENV DEBIAN_FRONTEND=noninteractive
+ENV TUNE_SINK="/tmp/tunesink_$(hostname)"
 
 # Set environment variables
-#ENV DEBIAN_FRONTEND=noninteractive
 #Disabled for now, going to have specific commands marked as non-interactive 
 
+#sticky bit fifo attacker disabling
+RUN sysctl fs.protected_regular=0
 
 # init before init
 RUN set -ex \
