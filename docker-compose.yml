@@ -1,9 +1,9 @@
-version: '1.0'
+version: '3.7'
 
 services:
   mopidy-client:
     build: .
-    image: tunedin:latest
+    image: mopidy-client:latest
     restart: always
       #network_mode: host
     volumes:
@@ -16,7 +16,7 @@ services:
     image: snapserver:latest
     restart: always
     depends_on:
-      - mopidy_client
+      - mopidy-client
     volumes:
       - snapfifos:/tmp/sinks
 volumes:

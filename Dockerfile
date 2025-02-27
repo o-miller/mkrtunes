@@ -43,7 +43,8 @@ RUN set -ex \
     && wget -q -O /etc/apt/sources.list.d/mopidy.list \
     	https://apt.mopidy.com/bookworm.list \
 	&& apt-get update \
-	&& apt-get install -y mopidy 
+	&& apt-get install -y mopidy \
+	&& rm -rf /var/lib/apt/lists/*
 
 RUN curl -sSL https://bootstrap.pypa.io/get-pip.py | python3 - --break-system-packages \
 	&& rm -rf ~/.cache/pip
