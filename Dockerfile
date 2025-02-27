@@ -30,9 +30,10 @@ RUN apt-get update \
 		dumb-init \
 		#alsa-utils \
 		build-essential \
-		#libasound2-dev \
+		libasound2-dev \
 		#jq \
 		#avahi-daemon \
+	&& rm -rf /var/lib/apt/lists/* \
 	&& apt-get clean
 
 RUN set -ex \
@@ -43,7 +44,8 @@ RUN set -ex \
     	https://apt.mopidy.com/bookworm.list \
 	&& apt-get install -y mopidy 
 
-RUN curl -sSL https://bootstrap.pypa.io/get-pip.py | python3 - --break-system-packages
+RUN curl -sSL https://bootstrap.pypa.io/get-pip.py | python3 - --break-system-packages \
+	&& rm -rf ~/.cache/pip
 
 #RUN set -ex \
 	#&& pip install --no-cache-dir --break-system-packages \
