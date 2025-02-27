@@ -1,0 +1,66 @@
+This is an attempt to make multi room playback open source and fun for all.
+
+TO DO:
+Docker images that run mopidy, get em as slim as possible (run debian slim, potentially explore google distroless base images, or alpine) 
+
+From there mopidy will run for each node or instance of playback that will occur. Via WAP and Avahi we hope to automate the process of new node detection. 
+
+Each mopidy instance will be containerized and could even pull from gstream spotify plugin. 
+
+GOAL: Gstreamer audio output configuration to filesink on shared volume on separate container. 
+Output raw audio, don't waste time converting or encoding. That is dumb. 
+From shared volume snapcast server will be hosted and those filesinks will then be able to be sync'd and or independent. Auto zoning and separate playback. Compartmentalize then each node will simply connect to docker container hosting snapserver.  
+
+
+
+Here be dragons. This is raw note posting from various points of this project, may be redundant at times. Sort and attempt to decipher at your own pace. 
+
+# Alpine Diskless Base
+# Docker debian slim
+# Snapcast server
+# Ethernet Connection to Router
+# host as wap for snapclients sync
+
+#basic structure
+docker container on server hosting diskless but persistent. hosts X no. of docker container where X is number of zones/clients we want.
+each of those docker containers hosts a mopidy instance, whose output is to alsa. alsa/jack/pulse/pipewire should all be explored. pipewire potentially best.
+the output configuration of whatever sound server must go to a FILE SINK/FIFO
+another final docker container has those file sinks all piped to a snapserver
+all clients are snapclients
+server connects via ethernet to a WAP/
+Use Gstreamer audio output configuration
+        `gstreamer-inspect-1.0`
+# also dynamic rescanning for frequency overlapping, detect least populated space, and adjust network for low latency, use dumb-init and avhai on docker/alpine to detect each other
+using ahvai the clients auto detect as snapclients and all is well.
+
+
+#NAMES AND PASSWORDS
+
+### SERVER
+
+# mkrtunes-lead.local
+# pw:letmein
+
+
+## Clients
+
+# mkrtunes-ride.local
+# pw:letmein
+
+# mkrtunes-miku.local
+# pw:llevan
+
+#THIS GOES IN TO DEPLOY SCRIPT TO INSTALL DOCKER AND ENABLE SSH, NOT IN CONTIANER
+#RUN ssh-keygen -A \
+#    && update-rc.d ssh enable \
+#    && invoke-rc.d ssh start
+
+#pipx vs python3 -m pip -venv
+#TODO: Locale
+
+# RUN set -ex \
+# 	&& sed -i 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/g' /etc/locale.gen \
+# 	&& echo 'LANG=en_US.UTF-8' > /etc/default/locale \
+# 	&& locale-gen 
+#	&& dpkg-reconfigure -f noninteractive locales
+
