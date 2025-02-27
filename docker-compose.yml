@@ -8,8 +8,9 @@ services:
       #network_mode: host
     volumes:
       - /var/lib/mopidy:/var/lib/mopidy
-      - snapfifos:/tmp/sinks
-        #environment:
+      - snapfifos:/audio
+    environment:
+      - TZ=America/New_York
         # - PULSE_SERVER=tcp:127.0.0.1:4713
   snapserver:
     build: ./shared-snap/
@@ -18,6 +19,8 @@ services:
     depends_on:
       - mopidy-client
     volumes:
-      - snapfifos:/tmp/sinks
+      - snapfifos:/audio
+    environment:
+      - TZ=America/New_York
 volumes:
   snapfifos: 
