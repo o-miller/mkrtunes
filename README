@@ -1,6 +1,8 @@
 This is an attempt to make multi room playback open source and fun for all.
 
 TO DO:
+AVAHI,.. ?? WTF <----
+
 Docker images that run mopidy, get em as slim as possible (run debian slim, potentially explore google distroless base images, or alpine) 
 
 From there mopidy will run for each node or instance of playback that will occur. Via WAP and Avahi we hope to automate the process of new node detection. 

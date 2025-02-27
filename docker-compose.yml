@@ -22,5 +22,8 @@ services:
       - snapfifos:/audio
     environment:
       - TZ=America/New_York
+    ports:
+      - "1704:1704"
+      - "1780:1780"
 volumes:
   snapfifos: 
