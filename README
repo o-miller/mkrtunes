@@ -13,6 +13,13 @@ From shared volume snapcast server will be hosted and those filesinks will then 
 
 
 
+### HOW TO BUILD
+#kill if need be	
+docker-compose down --rmi all --volumes --remove-orphans docker-compose build --no-cache
+docker-compose build --no-cache -d
+docker-compose up --build -d
+
+
 Here be dragons. This is raw note posting from various points of this project, may be redundant at times. Sort and attempt to decipher at your own pace. 
 
 # Alpine Diskless Base

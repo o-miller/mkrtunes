@@ -29,7 +29,7 @@ RUN apt-get update \
 		python3-distutils \
 		dumb-init \
 		#alsa-utils \
-		#build-essential \
+		build-essential \
 		#libasound2-dev \
 		#jq \
 		#avahi-daemon \
@@ -45,12 +45,12 @@ RUN set -ex \
 
 RUN curl -sSL https://bootstrap.pypa.io/get-pip.py | python3 - --break-system-packages
 
-RUN set -ex \
-	&& pip install --no-cache-dir --break-system-packages \
-	mopidy-spotify \
-	mopidy-iris \
-	mopidy-mpd \
-	mopidy-alsamixer
+#RUN set -ex \
+	#&& pip install --no-cache-dir --break-system-packages \
+	#mopidy-spotify \
+	#mopidy-iris \
+	#mopidy-mpd \
+	#mopidy-alsamixer
 
 #mopidy needs to be run as system user mopidy:audio (:group), you might need to chmod 777  
 
