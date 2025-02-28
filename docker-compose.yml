@@ -7,11 +7,10 @@ services:
     restart: unless-stopped
       #network_mode: host
     volumes:
-      - /var/lib/mopidy:/var/lib/mopidy
+      - ./mopidy:/var/lib/mopidy
       - snapfifos:/audio
     environment:
       - TZ=America/New_York
-        # - PULSE_SERVER=tcp:127.0.0.1:4713
   snapserver:
     build: ./shared-snap/
     image: snapserver:latest
