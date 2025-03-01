@@ -5,7 +5,7 @@ services:
     build: .
     image: mopidy-client:latest
     restart: unless-stopped
-      #network_mode: host
+    network_mode: host
     volumes:
       - ./mopidy:/var/lib/mopidy
       - snapfifos:/audio
