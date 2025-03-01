@@ -1,0 +1,138 @@
+    1  docker --version
+    2  mkdir mopidy-client-docker
+    3  cd mopidy-client-docker/
+    4  vim Dockerfile
+    5  sudo apt-get install vim
+    6  vim Dockerfile
+    7  vim entrypoint.sh
+    8  vim mopidy.conf.template
+    9  vim docker-compose.yml
+   10  docker-compose build
+   11  sudo docker-compose
+   12  sudo apt-get install docker-compose
+   13  docker-compose build
+   14  ls
+   15  ls -alr
+   16  vim mopidy.conf.template 
+   17  vim Dockerfile 
+   18  vim Dockerfile
+   19  sudo apt-get query mopidy-client
+   20  aptitude search mopidy-client
+   21  sudo apt search mopidy-client
+   22  ls
+   23  vim docker-compose.yml 
+   24  vim Dockerfile
+   25  uname -m
+   26  docker-compose build
+   27  vim docker-compose.yml 
+   28  vim Dockerfile 
+   29  docker-compose build
+   30  vim mopidy.conf.template 
+   31  vim Dockerfile 
+   32  sudo wget -q -O /etc/apt/keyrings/mopidy-archive-keyring.gpg   https://apt.mopidy.com/mopidy.gpg
+   33  uname
+   34  uname -l
+   35  uname --help
+   36  uname -r
+   37  lsb_release -a
+   38  sudo wget -q -O /etc/apt/sources.list.d/mopidy.list https://apt.mopidy.com/bookworm.list
+   39  sudo apt update
+   40  vim Dockerfile 
+   41  docker-compose build --no-cache
+   42  swget
+   43  wget
+   44  vim Dockerfile 
+   45  docker-compose build --no-cache
+   46  vim Dockerfile 
+   47  docker-compose build
+   48  vim Dockerfile 
+   49  docker-compose build
+   50  vim Dockerfile 
+   51  docker-compose build
+   52  vim Dockerfile 
+   53  sudo apt search python3-mopidy
+   54  sudo apt search python3-mopidy-
+   55  vim Dockerfile
+   56  docker-compose build --no-cache
+   57  vim Dockerfile 
+   58  docker-compose build --no-cache
+   59  docker-compose up -d
+   60  vim docker-compose.yml 
+   61  vim Dockerfile 
+   62  docker-compose build --no-cache
+   63  vim docker-compose.yml 
+   64  vim Dockerfile 
+   65  man raspi-config
+   66  vim Dockerfile 
+   67  sudo apt-get install docker
+   68  sudo apt-get install git
+   69  hostname
+   70  vim Dockerfile
+   71  git init
+   72  ls
+   73  git add README.md
+   74  man git
+   75  man git-add
+   76  man git commit
+   77  git remote add origin https://github.com/o-miller/mkrtunes.git
+   78  git branch -M main
+   79  ls
+   80  git push -u origin main
+   81  git init -b main
+   82  ls
+   83  git add .
+   84  git commit -m "initial commit"
+   85  git config user.email "johnowenmill@umass.edu"
+   86  git config user.name "Owen"
+   87  git commit -m "Initial"
+   88  ls
+   89  git remote add origin https://github.com/o-miller/mkrtunes.git
+   90  git remote -v
+   91  git push -u origin main
+   92  vim Dockerfile
+   93  git push -u origin main
+   94  git config user.email ""
+   95  git push -u origin main
+   96  git config
+   97  git config print
+   98  git config -l
+   99  git config user.email="93544146+o-miller@users.noreply.github.com"
+  100  git push -u origin main
+  101  git config user.email=""
+  102  git config user.email=
+  103  git config user.email=""
+  104  git config user.email""
+  105  git config user.email ""
+  106  git config -l
+  107  git config user.email "asdf"
+  108  git config -l
+  109  git config user.email ""
+  110  git push -u origin main
+  111  vim Dockerfile 
+  112  git diff
+  113  git status
+  114  git add Dockerfile 
+  115  git status
+  116  git commit -m "Added short to do / mainly an excuse to test remote push still working"
+  117  history | less
+  118  git push -u origin main
+  119  vim Dockerfile 
+  120  raspi-config 
+  121  sudo raspi-config
+  122  sudo set -x
+  123  set -x
+  124  echo hi
+  125  which raspi-config
+  126  vim /usr/bin/raspiq
+  127  vim /usr/bin/raspiqq
+  128  sudo vim /usr/bin/raspi-config
+  129  sudo raspi-config q
+  130  sudo raspi-config
+  131  set +x
+  132  set -x
+  133  sudo raspi-config
+  134  set +x
+  135  vim Dockerfile 
+  136  history -100
+  137  history 1000
+  138  history 150 > history.txt

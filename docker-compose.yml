@@ -1,9 +1,9 @@
 version: '3.7'
 
 services:
-  mopidy-client:
+  mopidy:
     build: .
-    image: mopidy-client:latest
+    image: mopidy:latest
     restart: unless-stopped
     network_mode: host
     volumes:
@@ -11,12 +11,13 @@ services:
       - snapfifos:/audio
     environment:
       - TZ=America/New_York
+      - MOP_HST=mop-${host}
   snapserver:
     build: ./shared-snap/
     image: snapserver:latest
     restart: unless-stopped
     depends_on:
-      - mopidy-client
+      - mopidy
     volumes:
       - snapfifos:/audio
     environment:
