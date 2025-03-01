@@ -1,5 +1,5 @@
-version: '3.7'
-
+version: '2.33'
+name: mkrtune
 services:
   mopidy:
     build: .
@@ -11,7 +11,6 @@ services:
       - snapfifos:/audio
     environment:
       - TZ=America/New_York
-      - MOP_HST=mop-${host}
   snapserver:
     build: ./shared-snap/
     image: snapserver:latest
