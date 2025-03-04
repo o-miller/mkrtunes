@@ -4,7 +4,7 @@ hostname = 0.0.0.0
 port = 6600
 
 [audio]
-output = audioresample ! audioconvert ! audio/x-raw,format=S24LE,rate=48000,channels=2 ! opusenc bitrate=96000 complexity=6 signal_type=OPUS_SIGNAL_MUSIC ! filesink location=/audio/mopidy_${HOSTNAME}.fifo
+output = audioresample ! audioconvert ! opusenc bitrate=96000 complexity=6 ! filesink location=/audio/mopidy_${HOSTNAME}.fifo
 [local]
 media_dir = /var/lib/mopidy/music
 

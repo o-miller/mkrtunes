@@ -1,7 +1,9 @@
 This is an attempt to make multi room playback open source and fun for all.
 
 TO DO:
-AVAHI,.. ?? WTF <----
+SNAPWEB ON HOST (ALPINE REPOS WON'T INSTALL FROM BLEEDING/EDGE OR MAYBE I'm DOING SOMETHING WRONG)
+SNAPCLIENT DOCKER IMAGE SETUP (./shared-snap/)
+MOPIDY-EXTENSION SETUP
 
 Docker images that run mopidy, get em as slim as possible (run debian slim, potentially explore google distroless base images, or alpine) 
 
