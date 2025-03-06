@@ -1,11 +1,15 @@
 FROM arm64v8/alpine:3.21.3
-RUN apk add --no-cache -U --upgrade alsa-utils \
+RUN set -ex \
+	&& echo "@testing https://dl-cdn.alpinelinux.org/alpine/edge/testing/" >> /etc/apk/repositories \
+  	&& cat /etc/apk/repositories \
+	&& apk add --no-cache -U --upgrade alsa-utils \
+	snapweb@testing \
 	snapcast \
 	avahi-dev \
 	npm \
 	#avahi-tools \
 	#=~${SNAPCAST_RELEASE} \
-	&& apk add snapweb --repository=https://dl-cdn.alpinelinux.org/alpine/edge/testing \
+	#&& apk add snapweb --repository=https://dl-cdn.alpinelinux.org/alpine/edge/testing \
 	&& rm -rf /tmp/*
 
 # FROM node:lts-alpine AS REACT-BUILDER
@@ -26,6 +30,7 @@ COPY startup.sh startup.sh
 RUN chmod +x ./startup.sh
 EXPOSE 1704
 EXPOSE 1780
-#ENV START_SNAPCLIENT=false
+ENV START_SNAPCLIENT=false
 
+# VOLUME /Audio
 ENTRYPOINT [ "./startup.sh"  ]

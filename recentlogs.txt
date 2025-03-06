@@ -1,0 +1,13 @@
+2025-03-06 15-49-26.338 [Info] (Snapserver) Version 0.29.0
+2025-03-06 15-49-26.339 [Notice] (init) Settings file: "/root/.config/snapserver/server.json"
+2025-03-06 15-49-26.339 [Error] (Avahi) Failed to create client: Daemon not running
+2025-03-06 15-49-26.339 [Info] (Snapserver) Using HTTP host name: 846941ef3fb3
+2025-03-06 15-49-26.340 [Info] (PcmStream) PcmStream: default, sampleFormat: 48000:16:2
+2025-03-06 15-49-26.340 [Info] (PipeStream) PipeStream mode: create
+2025-03-06 15-49-26.344 [Info] (Server) Stream: {"fragment":"","host":"","path":"/tmp/snapfifo","query":{"chunk_ms":"20","codec":"flac","name":"default","sampleformat":"48000:16:2"},"raw":"pipe:////tmp/snapfifo?chunk_ms=20&codec=flac&name=default&sampleformat=48000:16:2","scheme":"pipe"}
+2025-03-06 15-49-26.345 [Info] (FlacEnc) Init - compression level: 2
+2025-03-06 15-49-26.345 [Info] (ControlServer) Creating TCP acceptor for address: 0.0.0.0, port: 1705
+2025-03-06 15-49-26.345 [Info] (ControlServer) Creating HTTP acceptor for address: 0.0.0.0, port: 1780
+2025-03-06 15-49-26.345 [Info] (StreamServer) Creating stream acceptor for address: 0.0.0.0, port: 1704
+2025-03-06 15-49-26.345 [Info] (Snapserver) Number of threads: 4, hw threads: 4
+2025-03-06 15-49-26.345 [Error] (AsioStream) Error reading message: End of file, length: 0, ec: asio.misc:2
